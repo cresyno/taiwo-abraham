@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site.js';
+const links = [
+  { href: '/work', label: 'Work' },
+  { href: '/services', label: 'Services' },
+  { href: '/quote', label: 'Quote' },
+  { href: '/about', label: 'About' },
+];
+const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi Taiwo, I'd like to talk about a website.")}`;
+---
+<header class="fixed top-3 inset-x-3 z-50 mx-auto max-w-5xl">
+  <nav class="glass flex items-center justify-between rounded-2xl px-4 py-3">
+    <a href="/" class="font-display text-lg font-extrabold">taiwo<span class="text-sky-400">.</span>abraham</a>
+
+    <ul class="hidden md:flex gap-7 text-sm text-slate-300">
+      {links.map((l) => <li><a class="hover:text-white transition" href={l.href}>{l.label}</a></li>)}
+    </ul>
+    <a href={wa} class="btn-primary hidden md:inline-flex !py-2">Let's talk</a>
+
+    <!-- Mobile menu: pure HTML, zero JavaScript -->
+    <details class="md:hidden relative">
+      <summary class="list-none cursor-pointer rounded-lg border border-white/15 px-3 py-1.5 text-sm [&::-webkit-details-marker]:hidden">Menu</summary>
+      <div class="glass absolute right-0 mt-3 flex w-56 flex-col gap-1 rounded-2xl p-3">
+        {links.map((l) => <a class="rounded-lg px-3 py-2 hover:bg-white/10" href={l.href}>{l.label}</a>)}
+        <a href={wa} class="btn-primary mt-2">Let's talk</a>
+      </div>
+    </details>
+  </nav>
+</header>
