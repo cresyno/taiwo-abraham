@@ -1,0 +1,59 @@
+---
+import { site } from '../data/site.js';
+---
+<dialog id="work" data-wa={site.whatsapp} class="m-auto max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-slate-100 backdrop:bg-black/70">
+  <form id="work-form" class="p-6 md:p-8">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="label">Work with me</p>
+        <h2 class="display mt-2 text-4xl">Tell me about your project.</h2>
+      </div>
+      <button type="button" data-close-work class="text-sm text-muted hover:text-white">Close</button>
+    </div>
+    <p class="mt-3 text-sm text-muted">Fill this in and it opens WhatsApp with your message ready. Press Send there and it reaches me directly.</p>
+
+    <div class="mt-6 space-y-4">
+      <div><label class="label mb-2 block" for="w-name">Your name</label><input id="w-name" name="name" required class="field" autocomplete="name" /></div>
+      <div><label class="label mb-2 block" for="w-biz">Business or company name</label><input id="w-biz" name="business" class="field" autocomplete="organization" /></div>
+      <div><label class="label mb-2 block" for="w-contact">WhatsApp number or email</label><input id="w-contact" name="contact" required class="field" /></div>
+      <div><label class="label mb-2 block" for="w-need">What do you need help with?</label><input id="w-need" name="need" required class="field" /></div>
+      <div><label class="label mb-2 block" for="w-details">Short description of the project</label><textarea id="w-details" name="details" rows="4" required class="field"></textarea></div>
+    </div>
+
+    <button type="submit" class="btn btn-solid mt-6 w-full">Continue to WhatsApp</button>
+    {site.cresynoUrl && (
+      <p class="mt-5 text-center text-sm text-muted">Want to know more about the company? <a class="text-accent underline underline-offset-4" href={site.cresynoUrl} target="_blank" rel="noopener">Visit Cresyno Technology</a></p>
+    )}
+  </form>
+</dialog>
+
+<script>
+  const dlg = document.getElementById('work');
+  const form = document.getElementById('work-form');
+  document.querySelectorAll('[data-open-work]').forEach((b) =>
+    b.addEventListener('click', () => {
+      document.querySelectorAll('header details').forEach((d) => (d.open = false));
+      dlg.showModal();
+    })
+  );
+  dlg.querySelectorAll('[data-close-work]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = new FormData(form);
+    const msg = [
+      "Hi Taiwo, I found your portfolio and I'd like to work with you.",
+      '',
+      `Name: ${d.get('name')}`,
+      `Business: ${d.get('business') || 'Not provided'}`,
+      `Contact: ${d.get('contact')}`,
+      `I need help with: ${d.get('need')}`,
+      '',
+      'About the project:',
+      `${d.get('details')}`,
+    ].join('\n');
+    window.open(`https://wa.me/${dlg.dataset.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    form.reset();
+    dlg.close();
+  });
+</script>
