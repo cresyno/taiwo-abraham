@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import { journey, skills, learning, learnedFrom, principles } from '../data/site.js';
+---
+<Base title="About | Taiwo Abraham Feranmi" description="The story, learning path, skills and journey of Taiwo Abraham Feranmi, software developer and entrepreneur.">
+  <section class="mx-auto max-w-4xl px-5 pt-16 md:pt-24">
+    <p class="label">About</p>
+    <h1 class="display mt-4 text-6xl md:text-8xl">I'm <em class="text-accent">Taiwo.</em></h1>
+    <p class="mt-6 text-lg text-slate-300">I'm a software developer and entrepreneur, focused on building software, digital products and technology solutions that solve practical problems for businesses.</p>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">My story</h2>
+    <div class="mt-6 space-y-4 text-slate-300">
+      <p>I started learning technology because I became interested in a simple problem: many businesses lose potential customers and sales because of the way they operate and present themselves online.</p>
+      <p>I began learning web development in January 2026 with the goal of understanding how technology can solve real business problems, rather than simply learning to write code. It started with self-learning, experimenting with websites and building projects from scratch. At the beginning I learned entirely from my phone, which forced me to be resourceful and work with whatever tools I had. Eventually I got a laptop, and that let me take my development work further.</p>
+      <p>As I built more projects, I became more interested in the business side of technology: not only "can I build this?", but "does this actually help the person using it?"</p>
+      <p>That thinking led me to start working toward Cresyno Technology, with a bigger vision of creating technology that helps Nigerian businesses operate better, reach more customers, increase sales and avoid unnecessary losses. One of the products I'm building toward that is Cresoa, a business-focused platform designed around the needs of Nigerian small and growing businesses.</p>
+      <p>I'm still at the beginning of the journey. I'm building, learning, experimenting and improving on purpose, with the long-term goal of becoming one of the technology entrepreneurs contributing to the next generation of Nigerian businesses.</p>
+    </div>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">Where I am now</h2>
+    <p class="mt-6 text-slate-300">I'm 18 and a 100-level Computer Science student at Obafemi Awolowo University. I include this because I want this portfolio to show honestly where I am, rather than make me look more experienced than I am.</p>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">How I learned</h2>
+    <p class="mt-6 text-slate-300">I'm primarily self-taught. I don't claim formal certifications or mentorships I don't have. The strongest proof of my learning is the projects I've built.</p>
+    <ul class="mt-5 grid gap-2 text-slate-300 sm:grid-cols-2">
+      {learnedFrom.map((l) => <li class="flex gap-3"><span class="mt-2.5 h-px w-3 shrink-0 bg-accent"></span>{l}</li>)}
+    </ul>
+    <p class="mt-5 text-slate-300">I use AI tools as development assistants, and I review, test and make sure I understand what I build.</p>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">How I work</h2>
+    <div class="mt-6 space-y-6">
+      {principles.map(([t, d]) => (
+        <div><h3 class="font-semibold text-white">{t}</h3><p class="mt-1 text-slate-300">{d}</p></div>
+      ))}
+    </div>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">What I build with</h2>
+    <p class="mt-4 text-sm text-muted">Each technology is tied to the work that shows it.</p>
+    <div class="mt-6">
+      {skills.map(([n, u]) => (
+        <div class="rule grid gap-1 py-4 md:grid-cols-[240px_1fr] md:gap-10">
+          <p class="font-semibold text-white">{n}</p>
+          <p class="text-sm text-slate-300">{u}</p>
+        </div>
+      ))}
+    </div>
+    <h3 class="mt-10 font-semibold text-white">Currently learning</h3>
+    <p class="mt-2 text-slate-300">{learning.join(', ')}.</p>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">Where I'm heading</h2>
+    <div class="mt-6 space-y-4 text-slate-300">
+      <p>I want to become one of the technology pioneers building meaningful products in Nigeria and beyond. My long-term goal is to build my own technology company and products that solve real problems at scale, particularly problems faced by Nigerian businesses and consumers.</p>
+      <p>I want Cresyno Technology to grow beyond development services into a serious technology company with products of its own. I know I'm still early, so for now my priority is to keep learning, keep building, and gain the experience to make that real.</p>
+    </div>
+
+    <h2 class="display rule mt-16 pt-10 text-4xl">Journey</h2>
+    <ol class="mt-8">
+      {journey.map((j) => (
+        <li class="reveal rule grid gap-2 py-6 md:grid-cols-[180px_1fr] md:gap-10">
+          <p class="label text-accent">{j.date}</p>
+          <div>
+            <h3 class="display text-2xl">{j.title}</h3>
+            <p class="mt-2 text-slate-300">{j.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="rule mt-10 pt-10">
+      <button type="button" data-open-work class="btn btn-solid">Work with me</button>
+    </div>
+  </section>
+</Base>
