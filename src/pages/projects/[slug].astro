@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { p, next: projects[(i + 1) % projects.length] },
+  }));
+}
+const { p, next } = Astro.props;
+const meta = [
+  ['Type', p.kind],
+  ['Status', p.status],
+  ['Started', p.started],
+  ...(p.launched ? [['Launched', p.launched]] : []),
+  ['Built with', p.stack.join(', ')],
+];
+---
+<Base title={`${p.name} | Taiwo Abraham Feranmi`} description={p.summary}>
+  <article class="mx-auto max-w-6xl px-5 pt-16 md:pt-24">
+    <a href="/projects" class="text-sm text-muted hover:text-white">← All projects</a>
+    <p class="label mt-8">{p.number} · {p.kind}</p>
+    <h1 class="display mt-4 text-5xl md:text-8xl">{p.name}</h1>
+    <p class="mt-6 max-w-2xl text-lg text-slate-300">{p.summary}</p>
+    <a href={p.url} target="_blank" rel="noopener" class="btn btn-solid mt-8">Visit the live site →</a>
+
+    <dl class="mt-12 grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 md:grid-cols-5">
+      {meta.map(([k, v]) => (
+        <div class="bg-ink p-5"><dt class="label">{k}</dt><dd class="mt-2 text-sm text-slate-200">{v}</dd></div>
+      ))}
+    </dl>
+
+    <div class="mt-10 grid items-start gap-5 md:grid-cols-[2.2fr_1fr]">
+      <img src={`/images/${p.images.desktop}`} alt={`${p.alt} on desktop`} width="1600" height="1000" class="w-full rounded-xl border border-line" />
+      <img src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} width="750" height="1500" class="mx-auto w-full max-w-[260px] rounded-xl border border-line md:max-w-none" />
+    </div>
+
+    <div class="mt-16">
+      {p.sections.map((s) => (
+        <section class="reveal rule grid gap-6 py-10 md:grid-cols-[1fr_2fr] md:gap-12">
+          <h2 class="display text-3xl md:text-4xl">{s.heading}</h2>
+          <div class="space-y-4 text-slate-300">
+            {s.paragraphs?.map((t) => <p>{t}</p>)}
+            {s.items && (
+              <ul class="space-y-2">
+                {s.items.map((i) => <li class="flex gap-3"><span class="mt-2.5 h-px w-3 shrink-0 bg-accent"></span>{i}</li>)}
+              </ul>
+            )}
+            {s.after?.map((t) => <p>{t}</p>)}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <a href={`/projects/${next.slug}`} class="reveal rule mt-6 block py-10">
+      <p class="label">Next project</p>
+      <p class="display mt-3 text-4xl md:text-6xl">{next.name} →</p>
+    </a>
+  </article>
+</Base>
