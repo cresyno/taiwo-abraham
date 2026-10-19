@@ -1,9 +1,30 @@
 ---
 import { site } from '../data/site.js';
+const wa = `https://wa.me/${site.whatsapp}`;
 ---
-<footer class="mx-auto mt-32 max-w-5xl px-5 pb-10 text-sm text-slate-400">
-  <div class="glass flex flex-col gap-4 rounded-2xl p-6 md:flex-row md:items-center md:justify-between">
-    <p class="font-display text-lg font-bold text-white">Let's build something people trust.</p>
-    <p>© {new Date().getFullYear()} {site.name} · Ibadan, Nigeria</p>
+<footer class="mt-32 border-t border-line">
+  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-3">
+    <div>
+      <p class="display text-3xl">{site.shortName}</p>
+      <p class="mt-3 max-w-xs text-sm text-muted">{site.title}. Building software for Nigerian businesses.</p>
+    </div>
+    <div class="text-sm">
+      <p class="label">Pages</p>
+      <ul class="mt-4 space-y-2 text-slate-300">
+        <li><a class="hover:text-white" href="/">Home</a></li>
+        <li><a class="hover:text-white" href="/projects">Projects</a></li>
+        <li><a class="hover:text-white" href="/about">About</a></li>
+        <li><a class="hover:text-white" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="text-sm">
+      <p class="label">Contact</p>
+      <ul class="mt-4 space-y-2 text-slate-300">
+        <li><a class="hover:text-white" href={wa}>WhatsApp: {site.whatsappDisplay}</a></li>
+        <li><a class="hover:text-white" href={`mailto:${site.email}`}>{site.email}</a></li>
+        {site.cresynoUrl && <li><a class="hover:text-white" href={site.cresynoUrl} target="_blank" rel="noopener">Cresyno Technology</a></li>}
+      </ul>
+    </div>
   </div>
+  <p class="mx-auto max-w-6xl px-5 pb-10 text-xs text-muted">© {new Date().getFullYear()} {site.name}</p>
 </footer>
