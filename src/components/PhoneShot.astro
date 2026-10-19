@@ -1,0 +1,10 @@
+---
+// Trims the phone status bar (top) and gesture bar (bottom) from a screenshot.
+// Numbers are percentages of the screenshot height, tuned for 720x1640 screenshots.
+const { src, alt, trim = 8.4, bottom = 1.5 } = Astro.props;
+const visible = 100 - trim - bottom;
+const ratio = (720 / (1640 * (visible / 100))).toFixed(4);
+---
+<div class="w-full overflow-hidden rounded-[1.6rem] border border-line bg-surface" style={`aspect-ratio:${ratio}`}>
+  <img src={src} alt={alt} loading="lazy" class="block w-full" style={`transform:translateY(-${trim}%)`} />
+</div>
