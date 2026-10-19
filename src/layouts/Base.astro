@@ -2,36 +2,48 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-const { title = 'Taiwo Abraham', description = 'Websites for Nigerian businesses that build trust and bring customers.' } = Astro.props;
+import WorkModal from '../components/WorkModal.astro';
+const {
+  title = 'Taiwo Abraham Feranmi | Software Developer & Entrepreneur',
+  description = 'Portfolio of Taiwo Abraham Feranmi, software developer and entrepreneur building software for Nigerian businesses. Projects, story and journey.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#050a1c" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#060d1f" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232d63e8'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' font-family='Georgia,serif' fill='white'%3ET%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <div class="grid-bg"></div>
-    <div class="spot"></div>
     <Nav />
-    <main><slot /></main>
+    <main class="pt-16"><slot /></main>
     <Footer />
+    <WorkModal />
     <script>
-      // Spotlight follows finger / cursor
-      addEventListener('pointermove', (e) => {
-        document.body.style.setProperty('--mx', e.clientX + 'px');
-        document.body.style.setProperty('--my', e.clientY + 'px');
-      });
-      // Reveal elements as they scroll into view
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((en) => en.isIntersecting && en.target.classList.add('in'));
-      }, { threshold: 0.15 });
-      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.12 });
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('in'));
+      }
     </script>
   </body>
 </html>
