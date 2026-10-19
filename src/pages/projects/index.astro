@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectRow from '../../components/ProjectRow.astro';
+import { projects } from '../../data/projects.js';
+---
+<Base title="Projects | Taiwo Abraham Feranmi" description="Client projects and a personal product built by Taiwo Abraham Feranmi, with a case study for each.">
+  <section class="mx-auto max-w-6xl px-5 pt-16 md:pt-24">
+    <p class="label">Projects</p>
+    <h1 class="display mt-4 text-6xl md:text-8xl">The work.</h1>
+    <p class="mt-5 max-w-xl text-muted">Each project is labelled as client work or my own product, with its real status and dates. Open a case study for the full detail.</p>
+    <div class="mt-12">
+      {projects.map((p) => <ProjectRow p={p} />)}
+    </div>
+  </section>
+</Base>
