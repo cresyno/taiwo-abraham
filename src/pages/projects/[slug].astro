@@ -31,9 +31,8 @@ const meta = [
       ))}
     </dl>
 
-    <div class="mt-10 grid items-start gap-5 md:grid-cols-[2.2fr_1fr]">
-      <img src={`/images/${p.images.desktop}`} alt={`${p.alt} on desktop`} width="1600" height="1000" class="w-full rounded-xl border border-line" />
-      <img src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} width="750" height="1500" class="mx-auto w-full max-w-[260px] rounded-xl border border-line md:max-w-none" />
+    <div class="mt-10 flex justify-center rounded-2xl border border-line bg-surface px-5 py-10">
+      <img src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} width="750" height="1500" class="w-full max-w-[280px] rounded-xl border border-line md:max-w-[320px]" />
     </div>
 
     <div class="mt-16">
