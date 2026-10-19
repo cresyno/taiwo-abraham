@@ -1,62 +1,79 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site } from '../data/site.js';
-const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent("Hi Taiwo, I saw your portfolio and I'd like a website.")}`;
-const industries = ['Fashion', 'Events', 'Interiors', 'Fitness', 'Food', 'Salons', 'Real Estate', 'Schools'];
+import ProjectRow from '../components/ProjectRow.astro';
+import { site, principles } from '../data/site.js';
+import { projects } from '../data/projects.js';
+const facts = [
+  ['Studying', 'Computer Science, 100 level, Obafemi Awolowo University'],
+  ['Projects', '2 client projects and 1 personal product'],
+  ['Building toward', 'Cresyno Technology'],
+];
 ---
-<Base title="Taiwo Abraham — Websites for Nigerian Businesses">
-  <section class="relative mx-auto max-w-5xl px-5 pt-36 md:pt-44">
-    <div class="blob h-72 w-72 bg-blue-600 -top-10 -left-20"></div>
-    <div class="blob h-64 w-64 bg-sky-400 top-40 right-0" style="animation-delay:-6s"></div>
-
-    <div class="grid items-center gap-14 md:grid-cols-2">
+<Base>
+  <section class="mx-auto max-w-6xl px-5 pt-16 md:pt-24">
+    <div class="grid items-end gap-12 md:grid-cols-[1.3fr_1fr]">
       <div>
-        <p class="glass reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-sky-200">
-          <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
-          Taking new projects · Ibadan, Nigeria
-        </p>
-        <h1 class="font-display reveal mt-6 text-5xl font-extrabold leading-[1.02] md:text-7xl">
-          Websites that make customers <span class="shine">say yes.</span>
-        </h1>
-        <p class="reveal mt-6 max-w-md text-lg text-slate-300">
-          I design and build fast, beautiful websites and online stores for Nigerian businesses, so people find you, trust you, and buy.
+        <p class="label reveal">Portfolio</p>
+        <h1 class="display reveal mt-5 text-6xl md:text-8xl">Taiwo Abraham <em class="text-accent">Feranmi</em></h1>
+        <p class="reveal mt-6 text-xl text-white">{site.title}</p>
+        <p class="reveal mt-4 max-w-xl text-muted">
+          I build software, digital products and technology solutions that solve practical problems for businesses. I'm 18, still early in my journey, and this site shows honestly where I am and what I've built so far.
         </p>
         <div class="reveal mt-9 flex flex-wrap gap-3">
-          <a href="/work" class="btn-primary">See my work →</a>
-          <a href={wa} class="btn-ghost">Chat on WhatsApp</a>
+          <a href="/projects" class="btn btn-solid">View projects</a>
+          <button type="button" data-open-work class="btn btn-line">Work with me</button>
         </div>
       </div>
+      <figure class="reveal">
+        <img src="/images/portrait-taiwo-1200x1500.webp" alt="Portrait of Taiwo Abraham Feranmi" width="1200" height="1500" class="w-full rounded-2xl border border-line object-cover" />
+      </figure>
+    </div>
 
-      <!-- Floating browser mockup -->
-      <div class="stage reveal relative">
-        <div class="browser glass rounded-2xl p-4">
-          <div class="mb-4 flex items-center gap-1.5">
-            <i class="h-2.5 w-2.5 rounded-full bg-red-400/80"></i>
-            <i class="h-2.5 w-2.5 rounded-full bg-yellow-300/80"></i>
-            <i class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></i>
-            <span class="ml-3 flex-1 rounded-md bg-white/5 px-3 py-1 text-[11px] text-slate-400">yourbusiness.com</span>
-          </div>
-          <div class="skel h-24"></div>
-          <div class="mt-3 grid grid-cols-3 gap-3">
-            <div class="skel h-20"></div><div class="skel h-20"></div><div class="skel h-20"></div>
-          </div>
-          <div class="skel mt-3 h-4 w-2/3"></div>
-          <div class="skel mt-2 h-4 w-1/2"></div>
-          <div class="btn-primary mt-4 w-full">Book now</div>
-        </div>
-        <span class="chip glass absolute -left-3 top-10 rounded-full px-3 py-1.5 text-xs">⚡ Live in 7 days</span>
-        <span class="chip glass absolute -right-2 bottom-24 rounded-full px-3 py-1.5 text-xs" style="animation-delay:-2s">📱 Mobile-first</span>
-        <span class="chip glass absolute -bottom-3 left-10 rounded-full px-3 py-1.5 text-xs" style="animation-delay:-3s">💳 Paystack-ready</span>
+    <dl class="reveal mt-16 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-3">
+      {facts.map(([k, v]) => (
+        <div class="bg-ink p-5"><dt class="label">{k}</dt><dd class="mt-2 text-sm text-slate-200">{v}</dd></div>
+      ))}
+    </dl>
+  </section>
+
+  <section class="mx-auto mt-28 max-w-6xl px-5">
+    <p class="label reveal">Projects</p>
+    <h2 class="display reveal mt-4 max-w-2xl text-4xl md:text-6xl">What I've built, and exactly what I did.</h2>
+    <p class="reveal mt-4 max-w-xl text-muted">Two projects for clients and one product of my own. Each case study says plainly who it was for, what I built and how.</p>
+    <div class="mt-12">
+      {projects.map((p) => <ProjectRow p={p} />)}
+    </div>
+  </section>
+
+  <section class="mx-auto mt-24 max-w-6xl px-5">
+    <p class="label reveal">My story</p>
+    <div class="grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-14">
+      <h2 class="display reveal text-4xl md:text-5xl">Technology that actually helps the person using it.</h2>
+      <div class="reveal space-y-4 text-slate-300">
+        <p>I started learning web development in January 2026 because of a simple problem: many businesses lose customers and sales because of the way they operate and present themselves online. I wanted to understand how technology solves real business problems, not just how to write code.</p>
+        <p>I started on a phone, taught myself, and built projects from scratch. Since then I've delivered two client projects and started building my own product, Cresoa.</p>
+        <a href="/about" class="inline-block text-accent underline underline-offset-4">Read my full story and timeline →</a>
       </div>
     </div>
   </section>
 
-  <!-- Industries marquee -->
-  <section class="mt-28 overflow-hidden border-y border-white/10 py-5">
-    <div class="marquee gap-12 text-slate-400">
-      {[...industries, ...industries].map((i) => (
-        <span class="font-display mx-6 text-2xl font-bold">{i} <span class="text-sky-400">✦</span></span>
+  <section class="mx-auto mt-24 max-w-6xl px-5">
+    <p class="label reveal">How I work</p>
+    <div class="mt-8 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-3">
+      {principles.map(([t, d]) => (
+        <div class="reveal bg-ink p-7">
+          <h3 class="display text-2xl">{t}</h3>
+          <p class="mt-3 text-sm text-slate-300">{d}</p>
+        </div>
       ))}
+    </div>
+  </section>
+
+  <section class="reveal mx-auto mt-24 max-w-6xl px-5">
+    <div class="rounded-2xl border border-line bg-surface px-6 py-12 text-center md:py-16">
+      <h2 class="display text-4xl md:text-5xl">Want to work together?</h2>
+      <p class="mx-auto mt-4 max-w-md text-muted">Tell me about your project and I'll follow up with you personally on WhatsApp.</p>
+      <button type="button" data-open-work class="btn btn-solid mt-8">Work with me</button>
     </div>
   </section>
 </Base>
