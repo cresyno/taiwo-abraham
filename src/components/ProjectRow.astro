@@ -3,7 +3,7 @@ const { p } = Astro.props;
 const href = `/projects/${p.slug}`;
 ---
 <article class="reveal rule py-10 md:py-14">
-  <div class="grid items-center gap-8 md:grid-cols-[1fr_1.25fr] md:gap-14">
+  <div class="grid items-center gap-8 md:grid-cols-[1fr_1fr] md:gap-14">
     <div>
       <p class="label">{p.number} · {p.kind}</p>
       <h3 class="display mt-4 text-4xl md:text-5xl"><a href={href}>{p.name}</a></h3>
@@ -14,8 +14,8 @@ const href = `/projects/${p.slug}`;
       </dl>
       <a href={href} class="btn btn-line mt-7">Read the case study →</a>
     </div>
-    <a href={href} class="block overflow-hidden rounded-xl border border-line bg-surface">
-      <img src={`/images/${p.images.desktop}`} alt={`${p.alt} on desktop`} width="1600" height="1000" loading="lazy" class="w-full transition duration-500 hover:scale-[1.02]" />
+    <a href={href} class="flex h-80 items-start justify-center overflow-hidden rounded-xl border border-line bg-surface pt-8 md:h-[26rem]">
+      <img src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} width="750" height="1500" loading="lazy" class="w-52 rounded-t-xl border border-b-0 border-line md:w-60" />
     </a>
   </div>
 </article>
