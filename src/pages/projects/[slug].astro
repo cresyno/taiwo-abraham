@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PhoneShot from '../../components/PhoneShot.astro';
 import { projects } from '../../data/projects.js';
 
 export function getStaticPaths() {
@@ -32,7 +33,9 @@ const meta = [
     </dl>
 
     <div class="mt-10 flex justify-center rounded-2xl border border-line bg-surface px-5 py-10">
-      <img src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} width="750" height="1500" class="w-full max-w-[280px] rounded-xl border border-line md:max-w-[320px]" />
+      <div class="w-full max-w-[260px] md:max-w-[300px]">
+        <PhoneShot src={`/images/${p.images.mobile}`} alt={`${p.alt} on mobile`} />
+      </div>
     </div>
 
     <div class="mt-16">
